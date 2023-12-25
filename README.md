@@ -72,4 +72,12 @@ If everything is set up correctly, it should print the version of discord.py wit
 
 <hr>
 
+Below are the key steps to install `discord.py` on Ubuntu:
+
+**Install Python and pip:**
+If you don't have `Python` and `pip` installed, you can install them using:
+````
+sudo apt-get install python3
+sudo apt-get install python3-pip
+````
 
