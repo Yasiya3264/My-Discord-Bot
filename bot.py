@@ -25,8 +25,8 @@ async def on_message(message):
         await message.channel.send(msg)
 
 # Replace this value with your server ID and channel ID
-GUILD_ID = '1183117936408404148'
-CHANNEL_ID = '1188706807770787842'
+GUILD_ID = '1183117936408444148'
+CHANNEL_ID = '1188706807775787842'
 
 @bot.event
 async def on_member_join(member):
@@ -70,7 +70,7 @@ async def on_member_remove(member):
     # Send the embedded message to the specified channel
     await channel.send(embed=embed)
 
-SERVER_ID = '1183117936408404148'
+SERVER_ID = '1183117936408454148'
 
 @tasks.loop(seconds=10)  # Update every 10 seconds, you can adjust this as needed
 async def update_status():
@@ -80,5 +80,5 @@ async def update_status():
         member_count = server.member_count
         activity = discord.Activity(type=discord.ActivityType.watching, name=f"{member_count} members!")
         await bot.change_presence(activity=activity)
-
-bot.run("MTE4MzQ0NTA4NzE1MDE1Nzg2NA.G35LNx.jHeLUs-AACYbUzkpZhIxYb9gEIySNlRJ36s-BI")
+#please add your bot token to run this scripts
+bot.run("")
