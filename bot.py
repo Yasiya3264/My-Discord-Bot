@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from discord.ext import tasks
+from datetime import datetime
 
 
 intents = discord.Intents.default()
@@ -23,52 +24,61 @@ async def on_message(message):
         await message.delete()
         await message.channel.send(msg)
 
+# Replace this value with your server ID and channel ID
+GUILD_ID = '1183117936408404148'
+CHANNEL_ID = '1188706807770787842'
+
 @bot.event
 async def on_member_join(member):
-    target_channel_id = 1126551692511555675
+    guild = bot.get_guild(int(GUILD_ID))
+    channel = guild.get_channel(int(CHANNEL_ID))
+    
+    # Create an embedded message
+    embed = discord.Embed(
+        title="New Member Joined!",
+        description=f"Welcome {member.mention} to the server! \n\n **Play on our Minecraft Serve** : ```66.206.27.170:50501```",
+        color=discord.Color.green()
+    )
 
-    target_channel = bot.get_channel(target_channel_id)
+    # Set timestamp in the footer
+    embed.set_footer(text=f"{bot.user} || New user notification || MatriX Minecraft Server")
 
-    if target_channel:
-        embed = discord.Embed(
-            title=f"Welcome to the server, {member.name}!",
-            description="We're glad to have you here \n **🚀Please read rules before playing on MatriX Minecraft SMP server...**",
-            color=discord.Color.red()
-        )
+    # Set thumbnail to the member's avatar
+    embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/1183401724698951681/dd1af5c577d45c8d5a2299756f5f2b2f.png")
 
-        embed.set_thumbnail(url="https://images-ext-1.discordapp.net/external/UqpL7RQ2kkeRlUALWic3LwyEjT9GNt33yK962ONldv0/https/cdn.discordapp.com/avatars/1183401724698951681/dd1af5c577d45c8d5a2299756f5f2b2f.png?format=webp&quality=lossless")
-
-        await target_channel.send(embed=embed)
-    else:
-        print(f"Error: Target channel with ID {target_channel_id} not found.")
-
+    # Send the embedded message to the specified channel
+    await channel.send(embed=embed)
 
 @bot.event
 async def on_member_remove(member):
-    target_channel_id = 1126551692511555675
+    guild = bot.get_guild(int(GUILD_ID))
+    channel = guild.get_channel(int(CHANNEL_ID))
+    
+    # Create an embedded message
+    embed = discord.Embed(
+        title="Member Left",
+        description=f"Goodbye {member.mention}!",
+        color=discord.Color.red()
+    )
 
-    target_channel = bot.get_channel(target_channel_id)
+    # Set timestamp in the footer
+    embed.set_footer(text=f"{bot.user} || User leave notification || MatriX Minecraft Server")
 
-    if target_channel:
-        await target_channel.send(f"Goodbye {member.name}! We'll miss you.")
-    else:
-        print(f"Error: Target channel with ID {target_channel_id} not found.")
+    # Set thumbnail to the member's avatar
+    embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/1183401724698951681/dd1af5c577d45c8d5a2299756f5f2b2f.png")
 
-    update_status.start()
+    # Send the embedded message to the specified channel
+    await channel.send(embed=embed)
 
-@tasks.loop(seconds=1)
+SERVER_ID = '1183117936408404148'
+
+@tasks.loop(seconds=10)  # Update every 10 seconds, you can adjust this as needed
 async def update_status():
-    target_guild_id = 1124047934011490347
-    target_guild = bot.get_guild(target_guild_id)
+    server = bot.get_guild(int(SERVER_ID))
 
-    if target_guild:
-        member_count = target_guild.member_count
-
-        activity = discord.Activity(type=discord.ActivityType.watching,name=f"over {member_count} members")
+    if server:
+        member_count = server.member_count
+        activity = discord.Activity(type=discord.ActivityType.watching, name=f"{member_count} members!")
         await bot.change_presence(activity=activity)
-    else:
-        print(f"Error: Target guild with ID {target_guild_id} not found.")
 
-
-
-bot.run("MTE4MzQ0NTA4NzE1MDE1Nzg2NA.GbXXAn.8ec_3-epoTmaKY03TO_y--4P6UZXuRexSTRTQY")
+bot.run("MTE4MzQ0NTA4NzE1MDE1Nzg2NA.G35LNx.jHeLUs-AACYbUzkpZhIxYb9gEIySNlRJ36s-BI")
