@@ -81,3 +81,14 @@ sudo apt-get install python3
 sudo apt-get install python3-pip
 ````
 
+**Install discord.py:**
+Once you have `Python` and `pip` installed, use the following command to install `discord.py`:
+````
+python3 -m pip install -U discord.py
+````
+
+**Verify Installation:**
+You can verify that `discord.py` has been installed successfully by running the following command:
+````
+python3 -m pip show discord.py
+````
