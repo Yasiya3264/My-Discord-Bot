@@ -51,7 +51,7 @@ pip install -r requirements.txt
 
 #Discord.py Library
 
-To install discord.py on ```Windows```, you can use the following steps:
+To install `discord.py` on ```Windows```, you can use the following steps:
 
 **Open Command Prompt:**
 Open the Command Prompt or PowerShell on your Windows machine. You can do this by searching for "cmd" or "PowerShell" in the Start menu.
