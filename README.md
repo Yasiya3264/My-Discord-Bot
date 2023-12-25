@@ -21,12 +21,31 @@ bot.run('YOUR_BOT_TOKEN')
 
 To get you bot token please visit **```https://discord.com/developers/applications > Your application > Bot > Copy token```** and paste it here
 <hr>
-#dependencies
-<br>
-<ul>
-  <li>Python 3.12.10 <a href="https://www.python.org/downloads/">Click Here to download letest python vertion</a></li>
-  <li>Discord.py Library</li>
-</ul>
+
+## Dependencies
+
+1. **discord.py:**
+   - *Description:* `discord.py` is a Python library for interacting with the Discord API. It provides an asynchronous interface to interact with Discord servers, channels, and users.
+   - *Installation:* Install using `pip install discord.py`.
+
+2. **asyncio:**
+   - *Description:* `asyncio` is a Python library for writing asynchronous code. It is often used in conjunction with `discord.py` to handle asynchronous tasks efficiently.
+   - *Installation:* It comes with the Python standard library, so no additional installation is needed.
+
+3. **Python-dotenv:**
+   - *Description:* `python-dotenv` allows you to load environment variables from a file (`.env`) into your Python script, which is useful for storing sensitive information like API tokens.
+   - *Installation:* Install using `pip install python-dotenv`.
+
+4. **Others:**
+   - *Optional Dependencies:* Depending on the specific functionality of your bot, you might use additional libraries. For example, `requests` for making HTTP requests, `beautifulsoup4` for web scraping, or `google-api-python-client` for interacting with Google APIs.
+
+## Installation
+
+To install the dependencies, run the following command:
+
+```
+pip install -r requirements.txt
+```
 
 <hr>
 
