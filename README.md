@@ -21,13 +21,23 @@ bot.run('YOUR_BOT_TOKEN')
 
 To get you bot token please visit **```https://discord.com/developers/applications > Your application > Bot > Copy token```** and paste it here
 
-# dependencies
-
+#dependencies
+<br>
 <ul>
   <li>Python 3.12.10 <a href="https://www.python.org/downloads/">Click Here to download letest python vertion</a></li>
   <li>Discord.py Library</li>
 </ul>
 
-# Discord.py Library
+#Discord.py Library
 
-* To install discord.py on Windows, you can use the following steps:
+To install discord.py on ```Windows```, you can use the following steps:
+
+**Open Command Prompt:**
+Open the Command Prompt or PowerShell on your Windows machine. You can do this by searching for "cmd" or "PowerShell" in the Start menu.
+<br>
+**Install discord.py:**
+Use the following command to install the `discord.py` library using `pip`:
+
+````
+pip install discord.py
+````
