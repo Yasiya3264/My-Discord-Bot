@@ -20,13 +20,15 @@ bot.run('YOUR_BOT_TOKEN')
 ````
 
 To get you bot token please visit **```https://discord.com/developers/applications > Your application > Bot > Copy token```** and paste it here
-
+<hr>
 #dependencies
 <br>
 <ul>
   <li>Python 3.12.10 <a href="https://www.python.org/downloads/">Click Here to download letest python vertion</a></li>
   <li>Discord.py Library</li>
 </ul>
+
+<hr>
 
 #Discord.py Library
 
