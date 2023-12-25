@@ -20,3 +20,10 @@ bot.run('YOUR_BOT_TOKEN')
 ````
 
 To get you bot token please visit **```https://discord.com/developers/applications > Your application > Bot > Copy token```** and paste it here
+
+#dependencies
+
+<ul>
+  <li>Python 3.12.10</li>
+  <li>Discord.py Library</li>
+</ul>
