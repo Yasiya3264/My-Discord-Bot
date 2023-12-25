@@ -43,3 +43,14 @@ Use the following command to install the `discord.py` library using `pip`:
 ````
 pip install discord.py
 ````
+
+**Save the file and run it using the command:**
+
+````
+python your_bot.py
+````
+If everything is set up correctly, it should print the version of discord.py without any errors.
+
+<hr>
+
+
