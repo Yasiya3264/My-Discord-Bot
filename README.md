@@ -41,3 +41,66 @@
 Thank you for using [Your Bot Name]! If you encounter any issues or have suggestions, feel free to open an issue on GitHub.
 
 <a href="https://github.com/Yasiya3264/My-Discord-Bot" target="_blank">[GitHub Repository Link]</a>
+
+<hr>
+
+Certainly! Here's a template you can use for the "How to Use" section in your GitHub repository:
+
+```markdown
+## How to Use
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/your-repository.git
+   ```
+
+2. **Navigate to the project directory:**
+   ```bash
+   cd your-repository
+   ```
+
+3. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+### Configuration
+
+1. **Configure your Discord bot token:**
+   - Open `config.py` and replace `YOUR_TOKEN_HERE` with your actual Discord bot token.
+
+2. **Configure Discord server and channel IDs:**
+   - Update the `GUILD_ID` and `CHANNEL_ID` variables in the script with your Discord server and channel IDs.
+
+### Running the Bot
+
+1. **Run the bot script:**
+   ```bash
+   python bot.py
+   ```
+
+2. **Invite the bot to your Discord server:**
+   - Create a new Discord bot [here](https://discord.com/developers/applications).
+   - Copy the bot token and replace `YOUR_BOT_TOKEN` in the following URL:
+     ```
+     https://discord.com/oauth2/authorize?client_id=1183445087150157864&scope=bot&permissions=YOUR_BOT_PERMISSIONS
+     ```
+   - Visit the modified URL to invite the bot to your server.
+
+### Commands
+
+- `!send <message>`: Send a custom message to the channel.
+- `!ip`: Display a list of available servers and their status.
+
+### Minecraft Server Status
+
+- The bot will automatically check the status of your Minecraft server every 5 seconds.
+- It will update the server status message in the specified Discord channel.
+
+Feel free to customize the bot according to your needs and explore additional features!
+
+```
+
+Make sure to replace placeholders like `your-username`, `your-repository`, `YOUR_TOKEN_HERE`, `YOUR_BOT_TOKEN`, `YOUR_BOT_CLIENT_ID`, and `YOUR_BOT_PERMISSIONS` with your actual details. Additionally, adjust any paths or instructions based on your project structure and requirements.
