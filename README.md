@@ -32,7 +32,7 @@
 
 ## Installation
 
-- Follow the installation guide in the [run.md](<a href="https://github.com/Yasiya3264/My-Discord-Bot/blob/main/run.md" target="_blank">Link to README.md</a>) file.
+- Follow the installation guide in the [run.md](<a href="https://github.com/Yasiya3264/My-Discord-Bot/blob/main/installation.md" target="_blank">Link to README.md</a>) file.
 
 ## Notes
 
