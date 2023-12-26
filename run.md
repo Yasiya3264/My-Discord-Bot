@@ -7,3 +7,10 @@ cd /path/to/your/bot/directory
 ````
 03. Start a new screen session:
     This command creates a new screen session named "bot_session."
+````
+screen -S bot_session
+````
+04. Run your bot inside the screen session: `Replace python3 with the appropriate Python version if needed.`
+````
+python3 bot.py
+````
