@@ -47,13 +47,13 @@ Thank you for using [Your Bot Name]! If you encounter any issues or have suggest
 Certainly! Here's a template you can use for the "How to Use" section in your GitHub repository:
 
 ## How to Use
-```markdown
+
 
 
 ### Installation
 
 1. **Clone the repository:**
-   ```bash
+   ```
    git clone https://github.com/your-username/your-repository.git
    ```
 
