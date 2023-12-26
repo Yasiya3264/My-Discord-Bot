@@ -86,7 +86,7 @@ Certainly! Here's a template you can use for the "How to Use" section in your Gi
    - Create a new Discord bot [here](https://discord.com/developers/applications).
    - Copy the bot token and replace `YOUR_BOT_TOKEN` in the following URL:
      ```
-     https://discord.com/oauth2/authorize?client_id=1183445087150157864&scope=bot&permissions=YOUR_BOT_PERMISSIONS
+     https://discord.com/oauth2/authorize?client_id=YOUR_BOT_TOKEN&scope=bot&permissions=YOUR_BOT_PERMISSIONS
      ```
    - Visit the modified URL to invite the bot to your server.
 
