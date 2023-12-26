@@ -46,8 +46,9 @@ Thank you for using [Your Bot Name]! If you encounter any issues or have suggest
 
 Certainly! Here's a template you can use for the "How to Use" section in your GitHub repository:
 
-```markdown
 ## How to Use
+```markdown
+
 
 ### Installation
 
