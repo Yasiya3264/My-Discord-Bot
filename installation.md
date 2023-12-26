@@ -10,7 +10,7 @@ Before installing [Your Bot Name], ensure you have the following prerequisites:
 - [Python](https://www.python.org/) 3.6 or higher
 - [pip](https://pip.pypa.io/en/stable/) package manager
 - [git](https://git-scm.com/) version control system
-
+```
 ### Step-by-Step Installation Guide
 
 1. **Clone the Repository:**
