@@ -56,11 +56,11 @@ Before installing [Your Bot Name], ensure you have the following prerequisites:
 ### Additional Notes
 
 - Make sure to set the required permissions when inviting the bot to your server.
-- Refer to the [Documentation Link] for advanced configurations and command details.
+- Refer to the <a href="https://github.com/Yasiya3264/My-Discord-Bot/blob/main/dependencies.md" target="_blank">[Documentation Link]</a> for advanced configurations and command details.
 
-Thank you for choosing [Your Bot Name]! If you encounter any issues or have suggestions, feel free to open an issue on GitHub.
+Thank you for choosing MatriX Discord Bot! If you encounter any issues or have suggestions, feel free to open an issue on GitHub.
 
-[GitHub Repository Link]
+<a href="https://github.com/Yasiya3264/My-Discord-Bot" target="_blank">[GitHub Repository Link]</a>
 ```
 
 Replace placeholders such as `[Your Bot Name]`, `[YourUsername]`, `[YourBotRepository]`, `[YOUR_DISCORD_BOT_TOKEN]`, `[YOUR_CLIENT_ID]`, `[YOUR_PERMISSIONS]`, and `[Documentation Link]` with the appropriate values for your bot. Ensure that the instructions match the structure of your bot project.
