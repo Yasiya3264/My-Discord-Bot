@@ -32,20 +32,40 @@ async def on_message(message):
 
     elif message.content.startswith("!ip"):
         server_ip_list = (
-            "List of available servers : \n\n :green_circle:  Minecraft Server : `66.206.27.170:50501`  \n\n :red_circle:  TeamSpeak Server : `66.206.27.170:9964`  \n --------------------------------------------------------- \n :green_circle: Server is online  \n\n :red_circle: Server is offline"
+            "**List of available servers** :\n\n💚 Minecraft Server : ```66.206.27.170:50501``` \n🔴 TeamSpeak Server : ```66.206.27.170:9964```\n --------------------------------------------------------- \n💚 = Server is online \n🔴 = Server is offline"
         )
         await message.channel.send(server_ip_list)
+    # This command for send announcement from your message
+    elif message.content.startswith("!type"):  # Fix: use `startswith` instead of `start`
+        # Extract the content after "!type "
+        content = message.content[len("!type "):]
+        
+        # Create an embedded message
+        embed = discord.Embed(
+            title="MatriX s-Sport announcements :loudspeaker:",
+            description=f"```{content}```",
+            color=discord.Color.red()
+        )
+        
+        # Delete the original command message
+        await message.delete()
+
+        # Set timestamp in the footer
+        embed.set_footer(text=f"{bot.user} || {message.author}")
+
+        # Set thumbnail to a custom image URL
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1127473106731151430/1189204614961172530/wallpaper_minecraft_pc_bundle_1920x1080.png")
+
+        # Send the embedded message to the same channel where the command was invoked
+        await message.channel.send(embed=embed)
 
 # DISCORD SERVER WELCOME AND GOOD BYE MESSAGE SENDER
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Replace this value with your server ID and channel ID
-GUILD_ID = '1183117936408404148'
-CHANNEL_ID = '1188706807770787842'
-
 @bot.event
 async def on_member_join(member):
-    guild = bot.get_guild(int(GUILD_ID))
-    channel = guild.get_channel(int(CHANNEL_ID))
+    guild = bot.get_guild(int(1183117936408404148))
+    channel = guild.get_channel(int(1188706807770787842))
     
     # Create an embedded message
     embed = discord.Embed(
@@ -65,8 +85,8 @@ async def on_member_join(member):
 
 @bot.event
 async def on_member_remove(member):
-    guild = bot.get_guild(int(GUILD_ID))
-    channel = guild.get_channel(int(CHANNEL_ID))
+    guild = bot.get_guild(int(1183117936408404148))
+    channel = guild.get_channel(int(1188706807770787842))
     
     # Create an embedded message
     embed = discord.Embed(
@@ -88,13 +108,10 @@ async def on_member_remove(member):
 #------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Replace this value with your server ID and channel ID
-GUILD_ID = '1183117936408404148'
-CHANNEL_ID = '1183117938937577629'
-
 # Function to clear messages in the specified channel
 async def clear_channel_messages():
-    guild = bot.get_guild(int(GUILD_ID))
-    channel = guild.get_channel(int(CHANNEL_ID))
+    guild = bot.get_guild(int(1183117936408404148))
+    channel = guild.get_channel(int(1183117938937577629))
 
     print(f"Clearing messages in channel: {channel}")
 
@@ -113,9 +130,9 @@ async def check_minecraft_status():
     global last_message_id
 
     # THI 101,101,102 LINES USING FOR GET SPECIFIC DISCORD SERVER MEMBER COUNT AND DISPLAY IT ON BOT'S STATUS WITH WATCHING ACTIVITY...
-    guild = bot.get_guild(int(GUILD_ID))
+    guild = bot.get_guild(int(1183117936408404148))
     member_count = len(guild.members)
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{member_count} members"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{member_count} members | `!ips` to view available servers"))
 
     server_ip = "66.206.27.170"
     server_port = 50501  # Replace with your Minecraft server port
@@ -126,8 +143,8 @@ async def check_minecraft_status():
     except OSError:
         is_online = False
 
-    guild = bot.get_guild(int(GUILD_ID))
-    channel = guild.get_channel(int(CHANNEL_ID))
+    guild = bot.get_guild(int(1183117936408404148))
+    channel = guild.get_channel(int(1183117938937577629))
 
     print(f"Server Status: {is_online}")
 
@@ -147,16 +164,30 @@ async def check_minecraft_status():
 
     print(f"Last Status: {last_status}, Last Message ID: {last_message_id}")
 
+    # Log the server status in the designated log channel
+    log_channel = bot.get_channel(1189202119283183726)
+    await log_channel.send(f"Server Status: `{last_status}`, Last Message ID: `{last_message_id}`")
+
 def online_embed():
-    return discord.Embed(
+    embed = discord.Embed(
         title="Minecraft Server Status",
         description=":green_circle:  The Minecraft server is currently online! \n ```66.206.27.170:50501```",
         color=discord.Color.green()
     )
 
+    # Set the thumbnail to an image URL
+    embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/1183401724698951681/dd1af5c577d45c8d5a2299756f5f2b2f.png")
+    
+    return embed
+
 def offline_embed():
-    return discord.Embed(
+    embed = discord.Embed(
         title="Minecraft Server Status",
         description=":red_circle:  The Minecraft server is currently offline. \n ```66.206.27.170:50501```",
         color=discord.Color.red()
     )
+
+    # Set the thumbnail to an image URL
+    embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/1183401724698951681/dd1af5c577d45c8d5a2299756f5f2b2f.png")
+
+    return embed
