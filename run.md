@@ -14,3 +14,15 @@ screen -S bot_session
 ````
 python3 bot.py
 ````
+05. Detach from the screen session by pressing **`Ctrl + A`, then `D`**. This leaves the screen session running in the background.<br>
+    Your bot should now be running in the screen session. To reattach to the session later, use the following command:
+````
+screen -r bot_session
+````
+Remember, the specifics may vary depending on your system and setup, and you might need to install `screen` using:
+
+````
+sudo apt-get install screen
+````
+
+Make sure your Python environment is set up correctly and that you have installed all the required dependencies for your bot. Adjust the commands based on your specific requirements and configurations.
