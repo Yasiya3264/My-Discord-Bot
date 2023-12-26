@@ -1,8 +1,6 @@
 import discord
 from discord.ext import commands
 from discord.ext import tasks
-from datetime import datetime
-
 
 intents = discord.Intents.default()
 intents.members = True
@@ -10,9 +8,10 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
+# Use the bot.event decorator to wait until the bot is ready before adding the cog
 @bot.event
 async def on_ready():
-    print(f"{bot.user} has connected to Discord!")
+    print(f'{bot.user} has connected to Discord!')
 
 @bot.event
 async def on_message(message):
@@ -25,8 +24,8 @@ async def on_message(message):
         await message.channel.send(msg)
 
 # Replace this value with your server ID and channel ID
-GUILD_ID = '1183117936408444148'
-CHANNEL_ID = '1188706807775787842'
+GUILD_ID = '1183117936408404148'
+CHANNEL_ID = '1188706807770787842'
 
 @bot.event
 async def on_member_join(member):
@@ -36,7 +35,7 @@ async def on_member_join(member):
     # Create an embedded message
     embed = discord.Embed(
         title="New Member Joined!",
-        description=f"Welcome {member.mention} to the server! \n\n **Play on our Minecraft Serve** : ```66.206.27.170:50501```",
+        description=f"Welcome {member.mention} to the **MatriX e-Sports** discord server! \n\n **Good Luck Have Fun Guys...** \n Please go through our discord server rules :)",
         color=discord.Color.green()
     )
 
@@ -70,15 +69,17 @@ async def on_member_remove(member):
     # Send the embedded message to the specified channel
     await channel.send(embed=embed)
 
-SERVER_ID = '1183117936408454148'
+@bot.event
+async def on_message(message):
+    if message.author == bot.user:
+        return
 
-@tasks.loop(seconds=10)  # Update every 10 seconds, you can adjust this as needed
-async def update_status():
-    server = bot.get_guild(int(SERVER_ID))
-
-    if server:
-        member_count = server.member_count
-        activity = discord.Activity(type=discord.ActivityType.watching, name=f"{member_count} members!")
-        await bot.change_presence(activity=activity)
+    if message.content.startswith("!ip"):
+        # msg = message.content.split(" ", 1)[1]
+        # await message.delete()
+        server_ip_list = (
+            "List of available servers : \n\n :green_circle:  Minecraft Server : `66.206.27.170:50501`  \n\n :red_circle:  TeamSpeak Server : `66.206.27.170:9964`  \n --------------------------------------------------------- \n :green_circle: Server is online  \n\n :red_circle: Server is offline"
+        )
+        await message.channel.send(server_ip_list)
 #please add your bot token to run this scripts
 bot.run("")
