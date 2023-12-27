@@ -3,7 +3,7 @@ from discord.ext import commands
 from discord.ext import tasks
 import ping3
 import socket
-
+import asyncio
 
 intents = discord.Intents.default()
 intents.members = True
@@ -72,6 +72,8 @@ async def on_message(message):
 
         # Send the embedded message to the same channel where the command was invoked
         await message.channel.send(embed=embed)
+    
+    await bot.process_commands(message)  # Add this line        
 
 # DISCORD SERVER WELCOME AND GOOD BYE MESSAGE SENDER
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -192,5 +194,71 @@ def offline_embed():
     # Set the thumbnail to an image URL
     embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/1183401724698951681/dd1af5c577d45c8d5a2299756f5f2b2f.png")
     return embed
+
+# Reaction role impement
+# ---------------------------------------------------------------------------------------------------------------------------------
+
+# Static channel ID for role setup
+role_setup_channel_id = None
+
+# Static channel ID for log messages
+log_channel_id = 1189557382863400970  # Replace with the actual log channel ID
+
+@bot.command(name='setuprole')
+async def setup_role(ctx):
+    print("-----------------------------------------\n!setuprole command colled\n-----------------------------------------")
+    global role_setup_channel_id
+    role_setup_channel_id = ctx.channel.id
+
+    # Create an embedded message with reactions
+    embed = discord.Embed(
+        title="React to get roles!",
+        description="Click on the reactions below to get the roles you want.",
+        color=discord.Color.blue()
+    )
+
+    # Send the embedded message to the setup channel
+    setup_channel = bot.get_channel(role_setup_channel_id)
+    setup_message = await setup_channel.send(embed=embed)
+
+    # Log the setup message
+    log_channel = bot.get_channel(log_channel_id)
+    await log_channel.send(f"Role setup initiated in channel {setup_channel.mention}")
+
+    # Add reactions for each role
+    reactions = ['📢', '🎁', '📋']  # Add more reactions if needed
+    for reaction in reactions:
+        await setup_message.add_reaction(reaction)
+
+@bot.event
+async def on_reaction_add(reaction, user):
+    if user.bot:  # Ignore reactions from the bot
+        return
+
+    # Check if the reaction is in the setup channel and the message is the setup message
+    if reaction.message.channel.id == role_setup_channel_id:
+        # Assign roles based on reaction
+        if str(reaction.emoji) == '📢':
+            role_name = "Announcement Ping"
+        elif str(reaction.emoji) == '🎁':
+            role_name = "Giveaway Ping"
+        elif str(reaction.emoji) == '📋':
+            role_name = "Server Update"
+
+        # Get the role object
+        role = discord.utils.get(user.guild.roles, name=role_name)
+
+        if role in user.roles:
+            # If the user already has the role, remove it
+            await user.remove_roles(role)
+            action = "removed from"
+        else:
+            # If the user doesn't have the role, add it
+            await user.add_roles(role)
+            action = "added to"
+
+        # Log the role assignment or removal
+        log_channel = bot.get_channel(log_channel_id)
+        await log_channel.send(f"{user.mention} has been {action} the role: {role_name}")
 
 bot.run("ADD_YOUR_BOT_TOKEN_HERE")
