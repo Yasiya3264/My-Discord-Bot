@@ -192,3 +192,5 @@ def offline_embed():
     # Set the thumbnail to an image URL
     embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/1183401724698951681/dd1af5c577d45c8d5a2299756f5f2b2f.png")
     return embed
+
+bot.run("ADD_YOUR_BOT_TOKEN_HERE")
