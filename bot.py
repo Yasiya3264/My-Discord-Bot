@@ -3,13 +3,27 @@ from discord.ext import commands
 from discord.ext import tasks
 import ping3
 import socket
-import time
+
 
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
+
+# Replace this value with your server ID and channel ID
+# Function to clear messages in the specified channel
+async def clear_channel_messages():
+    guild = bot.get_guild(int(1183117936408404148))
+    channel = guild.get_channel(int(1183117938937577629))
+
+    print(f"Clearing messages in channel: {channel}")
+
+    # Fetch and delete messages in the channel
+    async for message in channel.history(limit=None):
+        await message.delete()
+
+    print("Messages cleared in this channel")
 
 # Use the bot.event decorator to wait until the bot is ready before adding the cog
 @bot.event
@@ -25,12 +39,12 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    if message.content.startswith("!send"):
+    if message.content.startswith("!say"):
         msg = message.content.split(" ", 1)[1]
         await message.delete()
         await message.channel.send(msg)
 
-    elif message.content.startswith("!ip"):
+    elif message.content.startswith("!ips"):
         server_ip_list = (
             "**List of available servers** :\n\n💚 Minecraft Server : ```66.206.27.170:50501``` \n🔴 TeamSpeak Server : ```66.206.27.170:9964```\n --------------------------------------------------------- \n💚 = Server is online \n🔴 = Server is offline"
         )
@@ -105,31 +119,23 @@ async def on_member_remove(member):
     await channel.send(embed=embed)
 
 # MINECRAFT SERVER STATUS CHECKER
-#------------------------------------------------------------------------------------------------------------------------------------------------------
-
-# Replace this value with your server ID and channel ID
-# Function to clear messages in the specified channel
-async def clear_channel_messages():
-    guild = bot.get_guild(int(1183117936408404148))
-    channel = guild.get_channel(int(1183117938937577629))
-
-    print(f"Clearing messages in channel: {channel}")
-
-    # Fetch and delete messages in the channel
-    async for message in channel.history(limit=None):
-        await message.delete()
-
-    print("Messages cleared in this channel")
+# ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 last_status = None  # Initialize last_status
 last_message_id = None  # Initialize last_message_id
 
+# Define the channel ID where you want to send error messages
+error_channel_id = 1189202119283183726  # Replace with the actual channel ID
+
+# Get the error channel
+error_channel = bot.get_channel(error_channel_id)
+
 @tasks.loop(seconds=5)
 async def check_minecraft_status():
     global last_status
-    global last_message_id
+    global last_message_id  # Add this line
 
-    # THI 101,101,102 LINES USING FOR GET SPECIFIC DISCORD SERVER MEMBER COUNT AND DISPLAY IT ON BOT'S STATUS WITH WATCHING ACTIVITY...
+    # Get server and channel information
     guild = bot.get_guild(int(1183117936408404148))
     member_count = len(guild.members)
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{member_count} members | `!ips` to view available servers"))
@@ -143,30 +149,29 @@ async def check_minecraft_status():
     except OSError:
         is_online = False
 
+        # Send a message to the error channel
+        if error_channel:
+            await error_channel.send("Error checking server status. Check the logs for details.")
+
     guild = bot.get_guild(int(1183117936408404148))
     channel = guild.get_channel(int(1183117938937577629))
 
-    print(f"Server Status: {is_online}")
+    message = None  # Declare message outside the if block
 
     if last_message_id:
         try:
             message = await channel.fetch_message(last_message_id)
-            print(f"Editing Message ID: {last_message_id}")
             await message.edit(embed=online_embed() if is_online else offline_embed())
+            last_message_id = message.id  # Set last_message_id here
         except discord.NotFound:
-            print(f"Old Message ID {last_message_id} not found. Proceeding with sending a new message.")
+            # Proceeding with sending a new message
+            last_message_id = None  # or set it to some default value if needed
     else:
-        print("No previous message ID. Sending a new message.")
+        # Sending a new message
         message = await channel.send(embed=online_embed() if is_online else offline_embed())
-        last_message_id = message.id
+        last_message_id = message.id  # Now it won't raise UnboundLocalError
 
-    last_status = "online" if is_online else "offline"
-
-    print(f"Last Status: {last_status}, Last Message ID: {last_message_id}")
-
-    # Log the server status in the designated log channel
-    log_channel = bot.get_channel(1189202119283183726)
-    await log_channel.send(f"Server Status: `{last_status}`, Last Message ID: `{last_message_id}`")
+    last_status = is_online
 
 def online_embed():
     embed = discord.Embed(
@@ -174,10 +179,8 @@ def online_embed():
         description=":green_circle:  The Minecraft server is currently online! \n ```66.206.27.170:50501```",
         color=discord.Color.green()
     )
-
     # Set the thumbnail to an image URL
     embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/1183401724698951681/dd1af5c577d45c8d5a2299756f5f2b2f.png")
-    
     return embed
 
 def offline_embed():
@@ -186,8 +189,6 @@ def offline_embed():
         description=":red_circle:  The Minecraft server is currently offline. \n ```66.206.27.170:50501```",
         color=discord.Color.red()
     )
-
     # Set the thumbnail to an image URL
     embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/1183401724698951681/dd1af5c577d45c8d5a2299756f5f2b2f.png")
-
     return embed
