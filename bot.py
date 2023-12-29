@@ -68,7 +68,7 @@ async def on_message(message):
         embed.set_footer(text=f"{bot.user} || {message.author}")
 
         # Set thumbnail to a custom image URL
-        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1127473106731151430/1189204614961172530/wallpaper_minecraft_pc_bundle_1920x1080.png")
+        embed.set_thumbnail(url="https://mx-cdn.netlify.app/src/logo_withmc_bg.png")
 
         # Send the embedded message to the same channel where the command was invoked
         await message.channel.send(embed=embed)
@@ -94,7 +94,7 @@ async def on_member_join(member):
     embed.set_footer(text=f"{bot.user} || New user notification || MatriX Minecraft Server")
 
     # Set thumbnail to the member's avatar
-    embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/1183401724698951681/dd1af5c577d45c8d5a2299756f5f2b2f.png")
+    embed.set_thumbnail(url="https://mx-cdn.netlify.app/src/logo_withmc_bg.png")
 
     # Send the embedded message to the specified channel
     await channel.send(embed=embed)
@@ -115,7 +115,7 @@ async def on_member_remove(member):
     embed.set_footer(text=f"{bot.user} || User leave notification || MatriX Minecraft Server")
 
     # Set thumbnail to the member's avatar
-    embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/1183401724698951681/dd1af5c577d45c8d5a2299756f5f2b2f.png")
+    embed.set_thumbnail(url="https://mx-cdn.netlify.app/src/logo_withmc_bg.png")
 
     # Send the embedded message to the specified channel
     await channel.send(embed=embed)
@@ -182,7 +182,7 @@ def online_embed():
         color=discord.Color.green()
     )
     # Set the thumbnail to an image URL
-    embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/1183401724698951681/dd1af5c577d45c8d5a2299756f5f2b2f.png")
+    embed.set_thumbnail(url="https://mx-cdn.netlify.app/src/logo_withmc_bg.png")
     return embed
 
 def offline_embed():
@@ -192,7 +192,7 @@ def offline_embed():
         color=discord.Color.red()
     )
     # Set the thumbnail to an image URL
-    embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/1183401724698951681/dd1af5c577d45c8d5a2299756f5f2b2f.png")
+    embed.set_thumbnail(url="https://mx-cdn.netlify.app/src/logo_withmc_bg.png")
     return embed
 
 # Reaction role impement
@@ -206,6 +206,9 @@ log_channel_id = 1189557382863400970  # Replace with the actual log channel ID
 
 @bot.command(name='setuprole')
 async def setup_role(ctx):
+    # Fetch and delete messages in the channel
+    async for message in ctx.channel.history(limit=None):
+        await message.delete()
     print("-----------------------------------------\n!setuprole command colled\n-----------------------------------------")
     global role_setup_channel_id
     role_setup_channel_id = ctx.channel.id
